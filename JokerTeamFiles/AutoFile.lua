@@ -107,8 +107,8 @@ GetJson = GetJson..'}}'
 local File = io.open('./'..Joker..'.json', "w")
 File:write(GetJson)
 File:close()
-local abbas = 'https://api.telegram.org/bot' .. TokenBot .. '/sendDocument'
-local curl = 'curl "' .. abbas .. '" -F "chat_id='..FFWFF..'" -F "document=@'..Joker..'.json' .. '" -F "caption=⌁︙نسخه تلقائيه تحتوي على ↫ '..#list..' مجموعه"'
+local abbas1 = 'https://api.telegram.org/bot' .. TokenBot .. '/sendDocument'
+local curl = 'curl "' .. abbas1 .. '" -F "chat_id='..FFWFF..'" -F "document=@'..Joker..'.json' .. '" -F "caption=⌁︙نسخه تلقائيه تحتوي على ↫ '..#list..' مجموعه"'
 io.popen(curl)
 io.popen('fm -fr '..Joker..'.json')
 DevAbbas:set(Joker.."Abbas:AutoFile:Time",os.date("%x"))
