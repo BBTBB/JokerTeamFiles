@@ -2,31 +2,31 @@ local function AutoFile(msg)
 local text = msg.content_.text_
 if Sudo(msg) then
 if text == 'تفعيل النسخه التلقائيه' or text == 'تفعيل جلب نسخه الكروبات' or text == 'تفعيل عمل نسخه للمجموعات' then   
-Dev_Abbas(msg.chat_id_,msg.id_, 1, "⌁︙تم تفعيل جلب نسخة الكروبات التلقائيه\n⌁︙سيتم ارسال نسخه تلقائيه للكروبات كل يوم الى خاص المطور الاساسي", 1, 'md')
-DevAbbas:del(Joker.."Abbas:Lock:AutoFile")
+Dev_Abs(msg.chat_id_,msg.id_, 1, "⌁︙تم تفعيل جلب نسخة الكروبات التلقائيه\n⌁︙سيتم ارسال نسخه تلقائيه للكروبات كل يوم الى خاص المطور الاساسي", 1, 'md')
+DevAbs:del(David.."Abs:Lock:AutoFile")
 end
 if text == 'تعطيل النسخه التلقائيه' or text == 'تعطيل جلب نسخه الكروبات' or text == 'تعطيل عمل نسخه للمجموعات' then  
-Dev_Abbas(msg.chat_id_,msg.id_, 1, "⌁︙تم تعطيل جلب نسخة الكروبات التلقائيه", 1, 'md')
-DevAbbas:set(Joker.."Abbas:Lock:AutoFile",true) 
+Dev_Abs(msg.chat_id_,msg.id_, 1, "⌁︙تم تعطيل جلب نسخة الكروبات التلقائيه", 1, 'md')
+DevAbs:set(David.."Abs:Lock:AutoFile",true) 
 end 
 end
 
-if (text and not DevAbbas:get(Joker.."Abbas:Lock:AutoFile")) then
-Time = DevAbbas:get(Joker.."Abbas:AutoFile:Time")
+if (text and not DevAbs:get(David.."Abs:Lock:AutoFile")) then
+Time = DevAbs:get(David.."Abs:AutoFile:Time")
 if Time then 
 if Time ~= os.date("%x") then 
-local list = DevAbbas:smembers(Joker..'Abbas:Groups') 
-local BotName = (DevAbbas:get(Joker.."Abbas:NameBot") or 'بروكس')
-local GetJson = '{"BotId": '..Joker..',"BotName": "'..BotName..'","GroupsList":{'  
+local list = DevAbs:smembers(David..'Abs:Groups') 
+local BotName = (DevAbs:get(David.."Abs:NameBot") or 'بروكس')
+local GetJson = '{"BotId": '..David..',"BotName": "'..BotName..'","GroupsList":{'  
 for k,v in pairs(list) do 
-LinkGroups = DevAbbas:get(Joker.."Abbas:Groups:Links"..v)
-Welcomes = DevAbbas:get(Joker..'Abbas:Groups:Welcomes'..v) or ''
-AbbasConstructors = DevAbbas:smembers(Joker..'Abbas:AbbasConstructor:'..v)
-BasicConstructors = DevAbbas:smembers(Joker..'Abbas:BasicConstructor:'..v)
-Constructors = DevAbbas:smembers(Joker..'Abbas:Constructor:'..v)
-Managers = DevAbbas:smembers(Joker..'Abbas:Managers:'..v)
-Admis = DevAbbas:smembers(Joker..'Abbas:Admins:'..v)
-Vips = DevAbbas:smembers(Joker..'Abbas:VipMem:'..v)
+LinkGroups = DevAbs:get(David.."Abs:Groups:Links"..v)
+Welcomes = DevAbs:get(David..'Abs:Groups:Welcomes'..v) or ''
+AbsConstructors = DevAbs:smembers(David..'Abs:AbsConstructor:'..v)
+BasicConstructors = DevAbs:smembers(David..'Abs:BasicConstructor:'..v)
+Constructors = DevAbs:smembers(David..'Abs:Constructor:'..v)
+Managers = DevAbs:smembers(David..'Abs:Managers:'..v)
+Admis = DevAbs:smembers(David..'Abs:Admins:'..v)
+Vips = DevAbs:smembers(David..'Abs:VipMem:'..v)
 if k == 1 then
 GetJson = GetJson..'"'..v..'":{'
 else
@@ -87,9 +87,9 @@ end
 end   
 GetJson = GetJson..'],'
 end
-if #AbbasConstructors ~= 0 then
-GetJson = GetJson..'"AbbasConstructors":['
-for k,v in pairs(AbbasConstructors) do
+if #AbsConstructors ~= 0 then
+GetJson = GetJson..'"AbsConstructors":['
+for k,v in pairs(AbsConstructors) do
 if k == 1 then
 GetJson =  GetJson..'"'..v..'"'
 else
@@ -104,21 +104,21 @@ end
 GetJson = GetJson..'"Welcomes":"'..Welcomes..'"}'
 end
 GetJson = GetJson..'}}'
-local File = io.open('./'..Joker..'.json', "w")
+local File = io.open('./'..David..'.json', "w")
 File:write(GetJson)
 File:close()
-local abbas1 = 'https://api.telegram.org/bot' .. TokenBot .. '/sendDocument'
-local curl = 'curl "' .. abbas1 .. '" -F "chat_id='..FFMFF..'" -F "document=@'..Joker..'.json' .. '" -F "caption=⌁︙نسخه تلقائيه تحتوي على ↫ '..#list..' مجموعه"'
+local abbas = 'https://api.telegram.org/bot' .. TokenBot .. '/sendDocument'
+local curl = 'curl "' .. abbas .. '" -F "chat_id='..DevId..'" -F "document=@'..David..'.json' .. '" -F "caption=⌁︙نسخه تلقائيه تحتوي على ↫ '..#list..' مجموعه"'
 io.popen(curl)
-io.popen('fm -fr '..Joker..'.json')
-DevAbbas:set(Joker.."Abbas:AutoFile:Time",os.date("%x"))
+io.popen('fm -fr '..David..'.json')
+DevAbs:set(David.."Abs:AutoFile:Time",os.date("%x"))
 end
 else 
-DevAbbas:set(Joker.."Abbas:AutoFile:Time",os.date("%x"))
+DevAbs:set(David.."Abs:AutoFile:Time",os.date("%x"))
 end
 end
 
 end
 return {
-Joker = AutoFile
+David = AutoFile
 }
