@@ -1,12 +1,12 @@
-local function ProNames(msg)
+local function ProoNames(msg)
 local text = msg.content_.text_
 if ChatType == 'sp' or ChatType == 'gp'  then
 if text and (text:match("^وضع شعار (.*)$") or text:match("^ضع شعار (.*)$")) then
 if Manager(msg) then
-if DevAbs:get(David.."Abs:Lock:ProNames"..msg.chat_id_) then
+if DevAbs:get(David.."Abs:Lock:ProoNames"..msg.chat_id_) then
 local Txt = text:match("^وضع شعار (.*)$") or text:match("^ضع شعار (.*)$")
 send(msg.chat_id_, msg.id_,'⌁︙تم تعيين ↫ '..Txt..' ك شعار للمجموعة')
-DevAbs:set(David.."Abs:ProNames:Txt"..msg.chat_id_,Txt)
+DevAbs:set(David.."Abs:ProoNames:Txt"..msg.chat_id_,Txt)
 else
 send(msg.chat_id_, msg.id_,'⌁︙ميزة الشعار معطله يرجى تفعيلها')
 end
@@ -14,42 +14,42 @@ end
 end
 if text and (text:match("^تعين عدد الكتم (.*)$") or text:match("^تعيين عدد الكتم (.*)$")) then
 if Manager(msg) then
-if DevAbs:get(David.."Abs:Lock:ProNames"..msg.chat_id_) then
+if DevAbs:get(David.."Abs:Lock:ProoNames"..msg.chat_id_) then
 local Num = text:match("^تعين عدد الكتم (.*)$") or text:match("^تعيين عدد الكتم (.*)$")
 send(msg.chat_id_, msg.id_,'⌁︙تم تعيين  ↫ '..Num..' عدد الكتم')
-DevAbs:set(David.."Abs:ProNames:Num"..msg.chat_id_,Num)
+DevAbs:set(David.."Abs:ProoNames:Num"..msg.chat_id_,Num)
 else
 send(msg.chat_id_, msg.id_,'⌁︙ميزة الشعار معطله يرجى تفعيلها')
 end
 end
 end
-if DevAbs:get(David.."Abs:Lock:ProNames"..msg.chat_id_) then
+if DevAbs:get(David.."Abs:Lock:ProoNames"..msg.chat_id_) then
 if text == "توحيد" or text == "شعار" then
-if DevAbs:get(David.."Abs:ProNames:Txt"..msg.chat_id_) then
-local ProNamesTxt = DevAbs:get(David.."Abs:ProNames:Txt"..msg.chat_id_)
-local ProNamesNum = DevAbs:get(David.."Abs:ProNames:Num"..msg.chat_id_) or 5
-send(msg.chat_id_, msg.id_,'⌁︙الشعار هو ↫ '..ProNamesTxt..'\n⌁︙عدد المحاولات للكتم ↫ '..ProNamesNum)
+if DevAbs:get(David.."Abs:ProoNames:Txt"..msg.chat_id_) then
+local ProoNamesTxt = DevAbs:get(David.."Abs:ProoNames:Txt"..msg.chat_id_)
+local ProoNamesNum = DevAbs:get(David.."Abs:ProoNames:Num"..msg.chat_id_) or 5
+send(msg.chat_id_, msg.id_,'⌁︙الشعار هو ↫ '..ProoNamesTxt..'\n⌁︙عدد المحاولات للكتم ↫ '..ProoNamesNum)
 else
 send(msg.chat_id_, msg.id_,'⌁︙لم يتم وضع الشعار للمجموعه')
 end
 end
 end
 if not msg.forward_info_ and not Constructor(msg) then
-if DevAbs:get(David.."Abs:Lock:ProNames"..msg.chat_id_) and DevAbs:get(David.."Abs:ProNames:Txt"..msg.chat_id_) then 
+if DevAbs:get(David.."Abs:Lock:ProoNames"..msg.chat_id_) and DevAbs:get(David.."Abs:ProoNames:Txt"..msg.chat_id_) then 
 tdcli_function ({ID = "GetUser",user_id_ = msg.sender_user_id_},function(extra,result,success)
 if result and result.first_name_ then 
-if result.first_name_:match("(.*)"..DevAbs:get(David.."Abs:ProNames:Txt"..msg.chat_id_).."(.*)") then 
+if result.first_name_:match("(.*)"..DevAbs:get(David.."Abs:ProoNames:Txt"..msg.chat_id_).."(.*)") then 
 DevAbs:srem(David..'Abs:Muted:'..msg.chat_id_, msg.sender_user_id_)
 else
-local ProNamesTxt = DevAbs:get(David.."Abs:ProNames:Num"..msg.chat_id_) or 5
-local UserNum = DevAbs:get(David.."Abs:ProNames:UserNum"..msg.chat_id_..msg.sender_user_id_) or 0
-if (tonumber(UserNum) == tonumber(ProNamesTxt) or tonumber(UserNum) > tonumber(ProNamesTxt)) then 
+local ProoNamesTxt = DevAbs:get(David.."Abs:ProoNames:Num"..msg.chat_id_) or 5
+local UserNum = DevAbs:get(David.."Abs:ProoNames:UserNum"..msg.chat_id_..msg.sender_user_id_) or 0
+if (tonumber(UserNum) == tonumber(ProoNamesTxt) or tonumber(UserNum) > tonumber(ProoNamesTxt)) then 
 DevAbs:sadd(David..'Abs:Muted:'..msg.chat_id_, msg.sender_user_id_)
-DevAbs:del(David.."Abs:ProNames:UserNum"..msg.chat_id_..msg.sender_user_id_)
+DevAbs:del(David.."Abs:ProoNames:UserNum"..msg.chat_id_..msg.sender_user_id_)
 send(msg.chat_id_, msg.id_,"⌁︙العضو ↫ ["..result.first_name_.."](https://t.me/"..(result.username_ or "Dev_Prox")..")\n⌁︙تم كتمه بسبب عدم وضع شعار المجموعه بجانب اسمه")
 else 
-DevAbs:incrby(David.."Abs:ProNames:UserNum"..msg.chat_id_..msg.sender_user_id_,1)
-send(msg.chat_id_, msg.id_, "⌁︙عذرا عزيزي ↫ ["..result.first_name_.."](https://t.me/"..(result.username_ or "Dev_Prox")..")\n⌁︙عليك وضع الشعار ↫ `"..DevAbs:get(David.."Abs:ProNames:Txt"..msg.chat_id_).."` بجانب اسمك\n⌁︙عدد المحاولات المتبقيه ↫ "..(tonumber(ProNamesTxt) - tonumber(UserNum)).."")
+DevAbs:incrby(David.."Abs:ProoNames:UserNum"..msg.chat_id_..msg.sender_user_id_,1)
+send(msg.chat_id_, msg.id_, "⌁︙عذرا عزيزي ↫ ["..result.first_name_.."](https://t.me/"..(result.username_ or "Dev_Prox")..")\n⌁︙عليك وضع الشعار ↫ `"..DevAbs:get(David.."Abs:ProoNames:Txt"..msg.chat_id_).."` بجانب اسمك\n⌁︙عدد المحاولات المتبقيه ↫ "..(tonumber(ProoNamesTxt) - tonumber(UserNum)).."")
 end
 end
 end
@@ -59,15 +59,15 @@ end
 
 if text == "تفعيل الشعار" and Constructor(msg) then
 send(msg.chat_id_, msg.id_, '⌁︙تم تفعيل شعار المجموعه')
-DevAbs:set(David.."Abs:Lock:ProNames"..msg.chat_id_,true)
+DevAbs:set(David.."Abs:Lock:ProoNames"..msg.chat_id_,true)
 end
 if text == "تعطيل الشعار" and Constructor(msg) then
 send(msg.chat_id_, msg.id_, '⌁︙تم تعطيل شعار المجموعه')
-DevAbs:del(David.."Abs:Lock:ProNames"..msg.chat_id_)
+DevAbs:del(David.."Abs:Lock:ProoNames"..msg.chat_id_)
 end
 end
 
 end
 return {
-David = ProNames
+David = ProoNames
 }
