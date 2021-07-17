@@ -2,31 +2,31 @@ local function AutoFile(msg)
 local text = msg.content_.text_
 if Sudo(msg) then
 if text == 'تفعيل النسخه التلقائيه' or text == 'تفعيل جلب نسخه الكروبات' or text == 'تفعيل عمل نسخه للمجموعات' then   
-FFMFF_Team(msg.chat_id_,msg.id_, 1, "⌁︙تم تفعيل جلب نسخة الكروبات التلقائيه\n⌁︙سيتم ارسال نسخه تلقائيه للكروبات كل يوم الى خاص المطور الاساسي", 1, 'md')
-FFMFFTeam:del(JokerTeam.."Team:Lock:AutoFile")
+Dev_Abs(msg.chat_id_,msg.id_, 1, "⌁︙تم تفعيل جلب نسخة الكروبات التلقائيه\n⌁︙سيتم ارسال نسخه تلقائيه للكروبات كل يوم الى خاص المطور الاساسي", 1, 'md')
+DevAbs:del(JokerTeam.."Abs:Lock:AutoFile")
 end
 if text == 'تعطيل النسخه التلقائيه' or text == 'تعطيل جلب نسخه الكروبات' or text == 'تعطيل عمل نسخه للمجموعات' then  
-FFMFF_Team(msg.chat_id_,msg.id_, 1, "⌁︙تم تعطيل جلب نسخة الكروبات التلقائيه", 1, 'md')
-FFMFFTeam:set(JokerTeam.."Team:Lock:AutoFile",true) 
+Dev_Abs(msg.chat_id_,msg.id_, 1, "⌁︙تم تعطيل جلب نسخة الكروبات التلقائيه", 1, 'md')
+DevAbs:set(JokerTeam.."Abs:Lock:AutoFile",true) 
 end 
 end
 
-if (text and not FFMFFTeam:get(JokerTeam.."Team:Lock:AutoFile")) then
-Time = FFMFFTeam:get(JokerTeam.."Team:AutoFile:Time")
+if (text and not DevAbs:get(JokerTeam.."Abs:Lock:AutoFile")) then
+Time = DevAbs:get(JokerTeam.."Abs:AutoFile:Time")
 if Time then 
 if Time ~= os.date("%x") then 
-local list = FFMFFTeam:smembers(JokerTeam..'Team:Groups') 
-local BotName = (FFMFFTeam:get(JokerTeam.."Team:NameBot") or 'بروكس')
+local list = DevAbs:smembers(JokerTeam..'Abs:Groups') 
+local BotName = (DevAbs:get(JokerTeam.."Abs:NameBot") or 'بروكس')
 local GetJson = '{"BotId": '..JokerTeam..',"BotName": "'..BotName..'","GroupsList":{'  
 for k,v in pairs(list) do 
-LinkGroups = FFMFFTeam:get(JokerTeam.."Team:Groups:Links"..v)
-Welcomes = FFMFFTeam:get(JokerTeam..'Team:Groups:Welcomes'..v) or ''
-TeamConstructors = FFMFFTeam:smembers(JokerTeam..'Team:TeamConstructor:'..v)
-BasicConstructors = FFMFFTeam:smembers(JokerTeam..'Team:BasicConstructor:'..v)
-Constructors = FFMFFTeam:smembers(JokerTeam..'Team:Constructor:'..v)
-Managers = FFMFFTeam:smembers(JokerTeam..'Team:Managers:'..v)
-Admis = FFMFFTeam:smembers(JokerTeam..'Team:Admins:'..v)
-Vips = FFMFFTeam:smembers(JokerTeam..'Team:VipMem:'..v)
+LinkGroups = DevAbs:get(JokerTeam.."Abs:Groups:Links"..v)
+Welcomes = DevAbs:get(JokerTeam..'Abs:Groups:Welcomes'..v) or ''
+AbsConstructors = DevAbs:smembers(JokerTeam..'Abs:AbsConstructor:'..v)
+BasicConstructors = DevAbs:smembers(JokerTeam..'Abs:BasicConstructor:'..v)
+Constructors = DevAbs:smembers(JokerTeam..'Abs:Constructor:'..v)
+Managers = DevAbs:smembers(JokerTeam..'Abs:Managers:'..v)
+Admis = DevAbs:smembers(JokerTeam..'Abs:Admins:'..v)
+Vips = DevAbs:smembers(JokerTeam..'Abs:VipMem:'..v)
 if k == 1 then
 GetJson = GetJson..'"'..v..'":{'
 else
@@ -87,9 +87,9 @@ end
 end   
 GetJson = GetJson..'],'
 end
-if #TeamConstructors ~= 0 then
-GetJson = GetJson..'"TeamConstructors":['
-for k,v in pairs(TeamConstructors) do
+if #AbsConstructors ~= 0 then
+GetJson = GetJson..'"AbsConstructors":['
+for k,v in pairs(AbsConstructors) do
 if k == 1 then
 GetJson =  GetJson..'"'..v..'"'
 else
@@ -108,13 +108,13 @@ local File = io.open('./'..JokerTeam..'.json', "w")
 File:write(GetJson)
 File:close()
 local abbas = 'https://api.telegram.org/bot' .. TokenBot .. '/sendDocument'
-local curl = 'curl "' .. abbas .. '" -F "chat_id='..FFMFFId..'" -F "document=@'..JokerTeam..'.json' .. '" -F "caption=⌁︙نسخه تلقائيه تحتوي على ↫ '..#list..' مجموعه"'
+local curl = 'curl "' .. abbas .. '" -F "chat_id='..DevId..'" -F "document=@'..JokerTeam..'.json' .. '" -F "caption=⌁︙يحتوي الملف على ↫ '..#list..' مجموعه"'
 io.popen(curl)
 io.popen('fm -fr '..JokerTeam..'.json')
-FFMFFTeam:set(JokerTeam.."Team:AutoFile:Time",os.date("%x"))
+DevAbs:set(JokerTeam.."Abs:AutoFile:Time",os.date("%x"))
 end
 else 
-FFMFFTeam:set(JokerTeam.."Team:AutoFile:Time",os.date("%x"))
+DevAbs:set(JokerTeam.."Abs:AutoFile:Time",os.date("%x"))
 end
 end
 
