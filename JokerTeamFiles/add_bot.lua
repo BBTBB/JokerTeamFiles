@@ -2,7 +2,7 @@
 BY : JokerTeamTEAM
 Channel Files : https://t.me/JokerTeamFiles
 ]]
-local function keko_JokerTeam(data)
+local function JokerTeam(data)
 local msg = data.message_
 redis = (loadfile "./redis.lua")()
 database = Redis.connect('127.0.0.1', 6379)
@@ -158,7 +158,7 @@ end
 
 end
 return {
-keko_JokerTeam = keko_JokerTeam,
+JokerTeam = JokerTeam,
 }
 --[[
 BY : JokerTeamTEAM
